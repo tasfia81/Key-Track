@@ -202,13 +202,39 @@ class _TakeKeyScreenState extends State<TakeKeyScreen> {
                 SizedBox(height: 8.h),
                 TextFormField(
                   controller: _nameController,
+                  style: theme.textTheme.bodyLarge,
                   decoration: InputDecoration(
                     hintText: 'Enter name of the person taking the key',
+                    hintStyle: theme.textTheme.bodyMedium,
                     filled: true,
                     fillColor: theme.cardTheme.color,
-                    border: OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.r),
-                      borderSide: BorderSide.none,
+                      borderSide: BorderSide(
+                        color: AppColors.border.withValues(alpha: 0.5),
+                        width: 1,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                      borderSide: BorderSide(
+                        color: theme.primaryColor,
+                        width: 1.5,
+                      ),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                      borderSide: const BorderSide(
+                        color: AppColors.statusOverdueText,
+                        width: 1,
+                      ),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                      borderSide: const BorderSide(
+                        color: AppColors.statusOverdueText,
+                        width: 1.5,
+                      ),
                     ),
                     contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
                   ),
@@ -232,15 +258,19 @@ class _TakeKeyScreenState extends State<TakeKeyScreen> {
                   decoration: BoxDecoration(
                     color: theme.cardTheme.color?.withValues(alpha: 0.5),
                     borderRadius: BorderRadius.circular(12.r),
+                    border: Border.all(
+                      color: AppColors.border.withValues(alpha: 0.3),
+                      width: 1,
+                    ),
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.access_time_rounded, size: 20.w, color: theme.disabledColor),
+                      const Icon(Icons.access_time_rounded, size: 20, color: AppColors.textSecondary),
                       SizedBox(width: 12.w),
                       Text(
                         _formatDateTime(_handoverTime),
                         style: theme.textTheme.bodyLarge?.copyWith(
-                          color: theme.disabledColor,
+                          color: AppColors.textSecondary,
                         ),
                       ),
                     ],
@@ -293,7 +323,7 @@ class _TakeKeyScreenState extends State<TakeKeyScreen> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
+                    foregroundColor: AppColors.secondaryBackground,
                     padding: EdgeInsets.symmetric(vertical: 16.h),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.r),
