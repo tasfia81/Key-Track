@@ -12,26 +12,24 @@ class StatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     Color bg;
     Color text;
     String label;
 
     switch (status) {
       case KeyStatus.available:
-        bg = isDark ? AppColors.statusAvailableBgDark : AppColors.statusAvailableBg;
-        text = isDark ? AppColors.statusAvailableTextDark : AppColors.statusAvailableText;
+        bg = AppColors.statusAvailableBg;
+        text = AppColors.statusAvailableText;
         label = 'Available';
         break;
       case KeyStatus.taken:
-        bg = isDark ? AppColors.statusTakenBgDark : AppColors.statusTakenBg;
-        text = isDark ? AppColors.statusTakenTextDark : AppColors.statusTakenText;
+        bg = AppColors.statusTakenBg;
+        text = AppColors.statusTakenText;
         label = 'Taken';
         break;
       case KeyStatus.overdue:
-        bg = isDark ? AppColors.statusOverdueBgDark : AppColors.statusOverdueBg;
-        text = isDark ? AppColors.statusOverdueTextDark : AppColors.statusOverdueText;
+        bg = AppColors.statusOverdueBg;
+        text = AppColors.statusOverdueText;
         label = 'Overdue';
         break;
     }
@@ -41,6 +39,10 @@ class StatusBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: text.withValues(alpha: 0.3),
+          width: 1,
+        ),
       ),
       child: Text(
         label,
