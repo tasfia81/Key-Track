@@ -61,4 +61,12 @@ class KeyRepository {
       _handovers[index] = updatedHandover;
     }
   }
+
+  HandoverModel? getActiveHandover(String keyId) {
+    try {
+      return _handovers.firstWhere((h) => h.keyId == keyId && h.returnedTime == null);
+    } catch (_) {
+      return null;
+    }
+  }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../viewmodels/key_list_viewmodel.dart';
 import '../widgets/key_card.dart';
+import 'key_detail_screen.dart';
 
 class KeyListScreen extends StatefulWidget {
   const KeyListScreen({super.key});
@@ -68,11 +69,13 @@ class _KeyListScreenState extends State<KeyListScreen> {
                         return KeyCard(
                           keyModel: item,
                           onTap: () {
-                            // Selected key action (to be implemented in future steps)
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('${item.keyName} selected'),
-                                duration: const Duration(seconds: 1),
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => KeyDetailScreen(
+                                  keyId: item.id,
+                                  viewModel: _viewModel,
+                                ),
                               ),
                             );
                           },
