@@ -52,7 +52,6 @@ class HandoverHistoryScreen extends StatelessWidget {
 
   Widget _buildHistoryCard(BuildContext context, HandoverModel record) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
 
     // Determine status and style for the record
     String statusText;
@@ -61,18 +60,18 @@ class HandoverHistoryScreen extends StatelessWidget {
 
     if (record.returnedTime != null) {
       statusText = 'Returned';
-      bg = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0); // Slate badge
-      text = isDark ? const Color(0xFFF1F5F9) : const Color(0xFF475569);
+      bg = AppColors.textSecondary.withValues(alpha: 0.12);
+      text = AppColors.textSecondary;
     } else {
       final isOverdue = DateTime.now().isAfter(record.expectedReturnTime);
       if (isOverdue) {
         statusText = 'Overdue';
-        bg = isDark ? AppColors.statusOverdueBgDark : AppColors.statusOverdueBg;
-        text = isDark ? AppColors.statusOverdueTextDark : AppColors.statusOverdueText;
+        bg = AppColors.statusOverdueBg;
+        text = AppColors.statusOverdueText;
       } else {
         statusText = 'Taken';
-        bg = isDark ? AppColors.statusTakenBgDark : AppColors.statusTakenBg;
-        text = isDark ? AppColors.statusTakenTextDark : AppColors.statusTakenText;
+        bg = AppColors.statusTakenBg;
+        text = AppColors.statusTakenText;
       }
     }
 
@@ -113,6 +112,10 @@ class HandoverHistoryScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: bg,
                     borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: text.withValues(alpha: 0.3),
+                      width: 1,
+                    ),
                   ),
                   child: Text(
                     statusText,

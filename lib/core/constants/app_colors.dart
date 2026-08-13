@@ -3,40 +3,23 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-  // Dark Theme Colors
-  static const Color darkBackground = Color(0xFF0F172A); // Slate 900
-  static const Color darkSurface = Color(0xFF1E293B);    // Slate 800
-  static const Color darkCard = Color(0xFF334155);       // Slate 700
-  static const Color darkTextPrimary = Color(0xFFF8FAFC); // Slate 50
-  static const Color darkTextSecondary = Color(0xFF94A3B8); // Slate 400
+  // Premium Dark Corporate Theme Colors
+  static const Color background = Color(0xFF0B2118); // Deep dark green
+  static const Color secondaryBackground = Color(0xFF080B09); // Near-black
+  static const Color card = Color(0xFF080B09); // Black background for containers
+  static const Color primary = Color(0xFFD4AF37); // Elegant gold
+  static const Color lightGold = Color(0xFFF1D77A);
+  static const Color textPrimary = Color(0xFFF5F5F0); // Warm white
+  static const Color textSecondary = Color(0xFFA7B3AA); // Muted gray-green
+  static const Color border = Color(0xFF6F5A20); // Subtle dark gold
 
-  // Light Theme Colors
-  static const Color lightBackground = Color(0xFFF8FAFC); // Slate 50
-  static const Color lightSurface = Color(0xFFFFFFFF);
-  static const Color lightCard = Color(0xFFF1F5F9);       // Slate 100
-  static const Color lightTextPrimary = Color(0xFF0F172A); // Slate 900
-  static const Color lightTextSecondary = Color(0xFF64748B); // Slate 500
+  // Status Colors (Harmonized with the dark green/gold environment)
+  static const Color statusAvailableBg = Color(0x1F10B981); // Emerald green with opacity
+  static const Color statusAvailableText = Color(0xFF34D399);
 
-  // Accent Colors
-  static const Color primary = Color(0xFF6366F1); // Indigo 500
+  static const Color statusTakenBg = Color(0x1FD4AF37); // Gold with opacity
+  static const Color statusTakenText = Color(0xFFF1D77A);
 
-  // Status Colors (Soft and premium, not harsh red/green)
-  static const Color statusAvailableBg = Color(0xFFDCFCE7); // Soft green
-  static const Color statusAvailableText = Color(0xFF15803D);
-
-  static const Color statusTakenBg = Color(0xFFFEF9C3); // Soft amber
-  static const Color statusTakenText = Color(0xFFA16207);
-
-  static const Color statusOverdueBg = Color(0xFFFEE2E2); // Soft red
-  static const Color statusOverdueText = Color(0xFFB91C1C);
-
-  // Status Colors Dark Mode
-  static const Color statusAvailableBgDark = Color(0xFF064E3B);
-  static const Color statusAvailableTextDark = Color(0xFF6EE7B7);
-
-  static const Color statusTakenBgDark = Color(0xFF78350F);
-  static const Color statusTakenTextDark = Color(0xFFFDE047);
-
-  static const Color statusOverdueBgDark = Color(0xFF7F1D1D);
-  static const Color statusOverdueTextDark = Color(0xFFFCA5A5);
+  static const Color statusOverdueBg = Color(0x1FEF4444); // Coral red with opacity
+  static const Color statusOverdueText = Color(0xFFF87171);
 }
