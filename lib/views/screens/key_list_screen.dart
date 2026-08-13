@@ -32,7 +32,6 @@ class _KeyListScreenState extends State<KeyListScreen> with WidgetsBindingObserv
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      // Automatically refresh statuses (e.g. overdue check) on app resume
       _viewModel.loadKeys();
     }
   }
@@ -103,9 +102,26 @@ class _KeyListScreenState extends State<KeyListScreen> with WidgetsBindingObserv
                   Expanded(
                     child: keys.isEmpty
                         ? Center(
-                            child: Text(
-                              'No keys found',
-                              style: theme.textTheme.titleMedium,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  _viewModel.searchQuery.isNotEmpty
+                                      ? Icons.search_off_rounded
+                                      : Icons.vpn_key_outlined,
+                                  size: 64.w,
+                                  color: theme.disabledColor.withValues(alpha: 0.5),
+                                ),
+                                SizedBox(height: 16.h),
+                                Text(
+                                  _viewModel.searchQuery.isNotEmpty
+                                      ? 'No keys found'
+                                      : 'No keys available',
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    color: theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.6),
+                                  ),
+                                ),
+                              ],
                             ),
                           )
                         : ListView.builder(
@@ -124,7 +140,6 @@ class _KeyListScreenState extends State<KeyListScreen> with WidgetsBindingObserv
                                       ),
                                     ),
                                   ).then((_) {
-                                    // Refresh status and list when returning from details screen
                                     _viewModel.loadKeys();
                                   });
                                 },
