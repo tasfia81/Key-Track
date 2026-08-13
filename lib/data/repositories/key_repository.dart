@@ -37,6 +37,19 @@ class KeyRepository {
   final List<HandoverModel> _handovers = [];
 
   List<KeyModel> getKeys() {
+    for (int i = 0; i < _keys.length; i++) {
+      final key = _keys[i];
+      if (key.status == KeyStatus.taken || key.status == KeyStatus.overdue) {
+        final active = getActiveHandover(key.id);
+        if (active != null) {
+          if (DateTime.now().isAfter(active.expectedReturnTime)) {
+            _keys[i] = key.copyWith(status: KeyStatus.overdue);
+          } else {
+            _keys[i] = key.copyWith(status: KeyStatus.taken);
+          }
+        }
+      }
+    }
     return List.unmodifiable(_keys);
   }
 

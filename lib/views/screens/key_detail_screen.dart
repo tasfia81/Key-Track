@@ -82,8 +82,8 @@ class KeyDetailScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 16.h),
 
-                  // Handover Info Card (Only shown if key is taken)
-                  if (keyModel.status == KeyStatus.taken && activeHandover != null) ...[
+                  // Handover Info Card (Shown if key is taken or overdue)
+                  if ((keyModel.status == KeyStatus.taken || keyModel.status == KeyStatus.overdue) && activeHandover != null) ...[
                     Card(
                       child: Padding(
                         padding: EdgeInsets.all(20.w),
@@ -157,7 +157,7 @@ class KeyDetailScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ] else if (keyModel.status == KeyStatus.taken) ...[
+                  ] else if (keyModel.status == KeyStatus.taken || keyModel.status == KeyStatus.overdue) ...[
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: isDark ? AppColors.statusOverdueBgDark : AppColors.statusOverdueBg,

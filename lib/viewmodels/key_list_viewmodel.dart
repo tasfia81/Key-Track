@@ -9,6 +9,9 @@ class KeyListViewModel extends ChangeNotifier {
   List<KeyModel> _keys = [];
   List<KeyModel> get keys => _keys;
 
+  String _searchQuery = '';
+  String get searchQuery => _searchQuery;
+
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
@@ -22,8 +25,39 @@ class KeyListViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<KeyModel> get filteredKeys {
+    if (_searchQuery.isEmpty) {
+      return _keys;
+    }
+    final query = _searchQuery.toLowerCase();
+    return _keys.where((key) {
+      final matchesKeyName = key.keyName.toLowerCase().contains(query);
+      final matchesIdentifier = key.identifier.toLowerCase().contains(query);
+      
+      bool matchesPerson = false;
+      if (key.status == KeyStatus.taken || key.status == KeyStatus.overdue) {
+        final active = getActiveHandover(key.id);
+        if (active != null && active.personName.toLowerCase().contains(query)) {
+          matchesPerson = true;
+        }
+      }
+      return matchesKeyName || matchesIdentifier || matchesPerson;
+    }).toList();
+  }
+
+  List<HandoverModel> get handovers {
+    return _repository.getHandovers();
+  }
+
+  void updateSearchQuery(String query) {
+    _searchQuery = query;
+    notifyListeners();
+  }
+
   KeyModel? getKeyById(String keyId) {
     try {
+      // Force refreshing the status check when querying key by ID
+      _keys = _repository.getKeys();
       return _keys.firstWhere((k) => k.id == keyId);
     } catch (_) {
       return null;
