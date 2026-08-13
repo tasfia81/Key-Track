@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../core/constants/app_colors.dart';
 import '../../viewmodels/key_list_viewmodel.dart';
 import '../widgets/key_card.dart';
 import 'key_detail_screen.dart';
@@ -85,14 +86,26 @@ class _KeyListScreenState extends State<KeyListScreen> with WidgetsBindingObserv
                   // Search Bar
                   TextField(
                     onChanged: _viewModel.updateSearchQuery,
+                    style: theme.textTheme.bodyLarge,
                     decoration: InputDecoration(
                       hintText: 'Search key, room ID, or holder...',
-                      prefixIcon: const Icon(Icons.search),
+                      hintStyle: theme.textTheme.bodyMedium,
+                      prefixIcon: Icon(Icons.search, color: theme.primaryColor),
                       filled: true,
                       fillColor: theme.cardTheme.color,
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.r),
-                        borderSide: BorderSide.none,
+                        borderSide: BorderSide(
+                          color: AppColors.border.withValues(alpha: 0.5),
+                          width: 1,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                        borderSide: BorderSide(
+                          color: theme.primaryColor,
+                          width: 1.5,
+                        ),
                       ),
                       contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
                     ),

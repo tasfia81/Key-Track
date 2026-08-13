@@ -28,7 +28,6 @@ class KeyDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
       appBar: AppBar(
@@ -131,7 +130,7 @@ class KeyDetailScreen extends StatelessWidget {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
-                        foregroundColor: Colors.white,
+                        foregroundColor: AppColors.secondaryBackground,
                         padding: EdgeInsets.symmetric(vertical: 16.h),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.r),
@@ -160,15 +159,14 @@ class KeyDetailScreen extends StatelessWidget {
                   ] else if (keyModel.status == KeyStatus.taken || keyModel.status == KeyStatus.overdue) ...[
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: isDark ? AppColors.statusOverdueBgDark : AppColors.statusOverdueBg,
-                        foregroundColor: isDark ? AppColors.statusOverdueTextDark : AppColors.statusOverdueText,
+                        backgroundColor: AppColors.statusOverdueBg,
+                        foregroundColor: AppColors.statusOverdueText,
                         padding: EdgeInsets.symmetric(vertical: 16.h),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.r),
-                          side: BorderSide(
-                            color: isDark 
-                                ? AppColors.statusOverdueTextDark.withValues(alpha: 0.3) 
-                                : AppColors.statusOverdueText.withValues(alpha: 0.3),
+                          side: const BorderSide(
+                            color: AppColors.statusOverdueText,
+                            width: 1,
                           ),
                         ),
                         elevation: 0,
